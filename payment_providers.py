@@ -1,8 +1,7 @@
 import random
-from abc import ABC, abstractmethod
 
 
-class PaymentGateway(ABC):
+class PaymentGateway:
     def __init__(self, amount):
         self.amount = amount
         super().__init__()
@@ -15,7 +14,7 @@ class PaymentGateway(ABC):
     def status(self, value):
         self._status = value
 
-    def get_gateway_wrt_amount(self):
+    def fetch_gateway_wrt_amount(self):
         if self.amount < 20:
             return CheapPaymentGateway(self.amount)
         elif 20 <= self.amount <= 500:

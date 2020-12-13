@@ -14,7 +14,7 @@ class ProcessPaymentTestCase(unittest.TestCase):
         self.payload = {
             'credit_card_number': self.fake.credit_card_number(),
             'card_holder': self.fake.name(),
-            'expiration_date': self.fake.credit_card_expire(),
+            'expiration_date': self.fake.date_time_this_decade(before_now=False, after_now=True),
             'security_code': self.fake.credit_card_security_code(),
             'amount': self.fake.pyfloat(positive=True, right_digits=2, max_value=1000),
         }
@@ -29,7 +29,3 @@ class ProcessPaymentTestCase(unittest.TestCase):
             data=self.payload
         )
         self.assertEqual(response.status_code, 200)
-
-
-if __name__ =='__main__':
-    unittest.main()  
