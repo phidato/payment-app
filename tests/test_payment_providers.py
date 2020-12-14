@@ -27,7 +27,7 @@ class PaymentGatewayTestCase(unittest.TestCase):
 
     def test_get_gateway_wrt_amount(self):
         driver = PaymentGateway(self.amount2)
-        payment_gateway = driver.get_gateway_wrt_amount()
+        payment_gateway = driver.fetch_gateway_wrt_amount()
         self.assertEqual(str(payment_gateway), 'Expensive Payment Gateway', 'Required gateway not returned')
     
     def test_expensive_payment_gateway_service(self):
@@ -63,7 +63,7 @@ class PaymentGatewayTestCase(unittest.TestCase):
             else:
                 self.assertEqual(payment_gateway.status, 200, '400 bad request')
         else:
-            self.assertEqual(payment_gateway.retry_limit, 4, 'Invalid retry limit')
+            self.assertNotEqual(payment_gateway.retry_limit, 4, 'Invalid retry limit')
 
 
 
